@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head> 
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <title>daily.dev</title>
+
+    <style>
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #0b0f19;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #111827;
+        padding: 15px 25px;
+        border-bottom: 1px solid #1f2937;
+      }
+ 
+      .logo { 
+       font-weight: bold; 
+       color: #FFF8DC; 
+       font-size: 18px; 
+       align-items: center;
+      }
+
+      .searchBar:hover { 
+       background: #374151; 
+       color: #fff; 
+      }
+
+      .searchBar { 
+        background: #1f2937; 
+        padding: 6px 20px; 
+        border-radius: 6px; 
+        color: #9ca3af; 
+        font-size: 14px; }
+
+      .stats { 
+       display: flex; 
+       gap: 15px; 
+       font-size: 16px; }
+
+      .mainLayout {
+        display: flex;
+        height: calc(100vh - 60px);       
+      }
+ 
+      .sidebar {
+        width: 70px;
+        background: #111827;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        gap: 15px;
+        border-right: 1px solid #1f2937;
+      }
+
+
+      .navBtn:hover { 
+       background: #374151; color: #fff; 
+      }
+
+      .navBtn {
+        background: #1f2937;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .contents {
+        flex: 1;
+        padding: 30px;
+        overflow-y: auto;
+      }
+
+      .chipCHIPS {
+        background: linear-gradient(135deg, #7c3aed, #db2777); 
+        color: white;
+        padding: 8px 16px;
+        border-radius: 400px;
+        cursor: pointer;
+        font-size: 14px; 
+      }
+
+      .chip:hover { 
+        background: #374151; color: #fff; 
+      }
+
+      .chips {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+
+      .chip {
+        background: #1f2937;
+        color: #9ca3af;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .chipActive {
+        background: #2563eb;
+        color: white;
+      }
+
+      .feedOne {
+        background: #111827;
+        border: 1px solid #1f2937;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .feedOne h3 { 
+        margin-top: 0; 
+        color: #fbbf24; 
+      }
+
+      .emptyBox {
+        text-align: center;
+        padding: 50px;
+        background: #111827;
+        border: 1px dashed #374151;
+        border-radius: 10px;
+        color: #9ca3af;
+      }
+    </style>
+</head>
+
+
+<body>
+    <header class = "navbar">
+      <div class = "logo"> daily.dev </div>
+      <div class = "searchBar">Search (Ctrl + K) </div>
+      <div class = "stats">
+        <span>💼</span>
+        <span>🏆</span>
+        <span>🔔</span>
+      </div>
+    </header>
+     
+   <div class = "mainLayout">
+      <aside class = "sidebar"> 
+        <button class = "navBtn" onclick = "showEmpty()">📂</button>
+        <button class = "navBtn" onclick = "showEmpty()">➕</button>
+        <button class = "navBtn" onclick = "showEmpty()" title = "profile">👤</button>
+        <button class = "navBtn" onclick = "showEmpty()" title = "squads">👥</button>
+        <button class = "navBtn" onclick = "showEmpty()" title = "history">👁</button> 
+        <button class = "navBtn" onclick = "showEmpty()" title = "updates">📢</button>
+        <button class = "navBtn" onclick = "showEmpty()" title = "favorites">⭐</button>
+      </aside>
+       
+    <main class = "contents">
+      <div class = "chips">
+        <span class = "chipCHIPS"> Want chips?</span> 
+        <span class = "chip chipActive" onclick = "switchTab('fyp', event)"> For you</span>
+        <span class = "chip" onclick = "switchTab('webDev', event)"> Web Development</span>
+        <span class = "chip" onclick = "switchTab('php', event)"> PHP </span>
+        <span class = "chip" onclick = "switchTab('hub', event)"> Git Hub </span>
+      </div>
+       
+      <div id = "feed">
+        <div class = "feedOne">
+          <h3>Happening Now</h3>
+          <a href = "https://says.com/my/news/why-pinduoduo-not-google-play-store-explained" style="color: #38bdf8;"> Why pinduoduo? </a>
+        </div>
+      </div>
+       
+    </main>
+  </div>
+   
+  <script>
+    function switchTab(tabName, event) {
+      const allChips = document.querySelectorAll('.chip');
+      allChips.forEach(chip => chip.classList.remove('chipActive'));
+      
+      event.target.classList.add('chipActive');
+      const feed = document.getElementById('feed');
+      
+      if (tabName === 'fyp') {
+        feed.innerHTML = `
+          <div class = "one">
+            <h3>Happening Now</h3>
+            <a href = "https://says.com/my/news/why-pinduoduo-not-google-play-store-explained" style="color: #38bdf8;">Why pinduoduo?</a>
+          </div>
+        `; 
+      } else {
+        feed.innerHTML = ` 
+          <div class = "emptyBox">
+            <h3>Maybe the news is stuck with the carrier pigeon :( </h3>
+          </div>
+        `; 
+      }
+    }
+
+
+    function showEmpty() {
+
+      const allChips = document.querySelectorAll('.chip');
+      allChips.forEach(chip => chip.classList.remove('chipActive'));
+
+      const feed = document.getElementById('feed');
+      feed.innerHTML = ` 
+        <div class = "emptyBox">
+          <h3>Nothing to see here :( </h3>
+        </div>
+      `;
+    }
+  </script>
+</body>
+
+
+</html>
